@@ -7,16 +7,25 @@ import { IoLocationSharp } from 'react-icons/io5'
 import { MdOutlineEmail } from 'react-icons/md'
 import { FaGraduationCap } from 'react-icons/fa'
 
+
+
+
+const aboutus = [
+  { Locations: "Dhaka, Bangladesh" },
+  { gmails: "mdsohelrana.dev7@gmail.com" },
+  { Learns: "Learning & Growing" },
+
+]
+
+
+
 const About = () => {
   return (
     <div className="pt-15">
       <Container>
         <Flex className={"justify-between"}>
-
           <Image srcimg={hero} srcalt={hero.png} />
-
           <div className="">
-
             <h3 className='text-2xl pb-5'>__About Me</h3>
             <h4 className='text-5xl'>Who I am</h4>
             <p className='py-3'>
@@ -32,7 +41,19 @@ const About = () => {
 
               <div className=" flex items-center gap-x-3   ">
                 <IoLocationSharp className='text-4xl' />
-                <span>Dhaka <br /> Bangladesh</span>
+                {aboutus.map((item) => {
+
+                  const icon = item.icon
+
+                  return (
+                    <div className="" key={"item.Locations"}>
+
+                      
+                    </div>
+                  )
+
+                })}
+
               </div>
 
               <div className=" flex items-center gap-x-3  mx-10 px-10 border-l border-r">
