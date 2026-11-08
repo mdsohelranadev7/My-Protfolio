@@ -3,11 +3,12 @@ import Container from '../components/Container'
 import { Link } from 'react-router-dom'
 import Flex from '../components/Flex'
 import Home from '../Pages/Home'
+import About from '../Pages/About'
 
 export const Heder = () => {
     return (
         <>
-            <div className="bg-[#333] border-b">
+            <div className="bg-[#333] border-b ">
                 <Container>
                     <Flex className={"justify-between py-3"}>
 
@@ -26,13 +27,17 @@ export const Heder = () => {
                             </ul>
                         </div>
 
+                        <div className="text-blue-500">
+                            Download Cv
+                        </div>
+
                     </Flex>
 
                 </Container>
+             
 
 
             </div>
-
 
         </>
 
