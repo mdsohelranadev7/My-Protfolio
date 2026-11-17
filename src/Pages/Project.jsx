@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Container from '../components/Container'
 import ProjectCard from '../components/ProjectCard'
-import ProjectCounter from '../components/ProjectCounter'
+import CounterStats from '../components/CounterStats'
 import { projectsData } from '../data/projectsData'
 import { Sparkles, FolderGit2, ArrowRight } from 'lucide-react'
 
@@ -62,8 +62,8 @@ const Project = () => {
           </p>
         </div>
 
-        {/* ================= ANIMATED PROJECT COUNTER ================= */}
-        <ProjectCounter projects={projectsData} />
+        {/* ================= HORIZONTAL BLACK COUNTER CONTAINER (MATCHING REFERENCE IMAGE) ================= */}
+        <CounterStats />
 
         {/* ================= CATEGORY FILTERS ================= */}
         <div className="mt-12 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
