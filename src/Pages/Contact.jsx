@@ -19,7 +19,7 @@ import {
 import { FaGithub, FaLinkedin, FaFacebook } from 'react-icons/fa'
 
 /**
- * Reusable Contact Information Card Component
+ * Reusable Contact Information Card Component with Light & Dark Mode
  */
 const ContactInfoCard = ({
   icon: Icon,
@@ -35,7 +35,7 @@ const ContactInfoCard = ({
   const isExternal = link && link.startsWith('http')
 
   return (
-    <div className="group relative flex items-start gap-4 rounded-2xl border border-slate-200/90 bg-white/90 p-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md sm:p-5">
+    <div className="group relative flex items-start gap-4 rounded-2xl border border-slate-200/90 bg-white/90 p-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/90 dark:hover:border-blue-500/50 sm:p-5">
       {/* Icon Badge */}
       <div
         className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${bgColor} shadow-sm transition-transform duration-300 group-hover:scale-105`}
@@ -45,7 +45,7 @@ const ContactInfoCard = ({
 
       {/* Details */}
       <div className="min-w-0 flex-1">
-        <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
+        <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400">
           {title}
         </p>
 
@@ -55,20 +55,20 @@ const ContactInfoCard = ({
               href={link}
               target={isExternal ? '_blank' : undefined}
               rel={isExternal ? 'noopener noreferrer' : undefined}
-              className="inline-flex items-center gap-1.5 break-words text-base font-semibold text-slate-800 transition-colors hover:text-blue-600"
+              className="inline-flex items-center gap-1.5 break-words text-base font-semibold text-slate-800 transition-colors hover:text-blue-600 dark:text-slate-100 dark:hover:text-blue-400"
             >
               <span>{value}</span>
               {isExternal && <ExternalLink className="h-3.5 w-3.5 text-slate-400" />}
             </a>
           ) : (
-            <span className="break-words text-base font-semibold text-slate-800">
+            <span className="break-words text-base font-semibold text-slate-800 dark:text-slate-100">
               {value}
             </span>
           )}
         </div>
 
         {subValue && (
-          <p className="mt-0.5 text-xs text-slate-500">{subValue}</p>
+          <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{subValue}</p>
         )}
       </div>
 
@@ -77,12 +77,12 @@ const ContactInfoCard = ({
         <button
           type="button"
           onClick={() => onCopy(copyValue)}
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-500 transition-all hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-500 transition-all hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:border-slate-600 dark:hover:bg-slate-700 dark:hover:text-blue-400"
           title={`Copy ${title}`}
           aria-label={`Copy ${title}`}
         >
           {isCopied ? (
-            <Check className="h-4 w-4 text-emerald-600" />
+            <Check className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
           ) : (
             <Copy className="h-4 w-4" />
           )}
@@ -93,14 +93,14 @@ const ContactInfoCard = ({
 }
 
 /**
- * Reusable Social Link Button Component
+ * Reusable Social Link Button Component with Light & Dark Mode
  */
 const SocialLinkButton = ({ name, icon: Icon, url, hoverStyles }) => (
   <a
     href={url}
     target="_blank"
     rel="noopener noreferrer"
-    className={`inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-2.5 text-sm font-medium text-slate-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${hoverStyles}`}
+    className={`inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-2.5 text-sm font-medium text-slate-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 ${hoverStyles}`}
   >
     <Icon className="text-lg" />
     <span>{name}</span>
@@ -108,7 +108,7 @@ const SocialLinkButton = ({ name, icon: Icon, url, hoverStyles }) => (
 )
 
 /**
- * Main Contact Page Component
+ * Main Contact Page Component with Light & Dark Mode
  */
 const Contact = () => {
   // Form Input States
@@ -131,20 +131,21 @@ const Contact = () => {
       id: 'email',
       icon: Mail,
       title: 'Email Address',
-      value: 'mdsohelrana.dev7@gmail.com',
+      value: 'hello@example.com',
+      subValue: 'Direct: mdsohelrana.dev7@gmail.com',
       link: 'mailto:hello@example.com',
       copyValue: 'hello@example.com',
-      bgColor: 'bg-blue-50 text-blue-600',
+      bgColor: 'bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400',
     },
     {
       id: 'phone',
       icon: Phone,
       title: 'Phone Number',
-      value: '+8801309497761',
-      subValue: 'Available for 24 hour ',
+      value: '+880 1XXXXXXXXX',
+      subValue: 'Available: Sun - Thu, 9am - 8pm BST',
       link: 'tel:+8801XXXXXXXXX',
       copyValue: '+880 1XXXXXXXXX',
-      bgColor: 'bg-emerald-50 text-emerald-600',
+      bgColor: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400',
     },
     {
       id: 'location',
@@ -153,7 +154,7 @@ const Contact = () => {
       value: 'Dhaka, Bangladesh',
       subValue: 'Available for Remote Worldwide',
       link: 'https://maps.google.com/?q=Dhaka,Bangladesh',
-      bgColor: 'bg-purple-50 text-purple-600',
+      bgColor: 'bg-purple-50 text-purple-600 dark:bg-purple-950/40 dark:text-purple-400',
     },
   ]
 
@@ -163,7 +164,7 @@ const Contact = () => {
       name: 'GitHub',
       icon: FaGithub,
       url: 'https://github.com/mdsohelranadev7',
-      hoverStyles: 'hover:bg-slate-900 hover:text-white hover:border-slate-900',
+      hoverStyles: 'hover:bg-slate-900 hover:text-white hover:border-slate-900 dark:hover:bg-slate-700',
     },
     {
       name: 'LinkedIn',
@@ -196,7 +197,6 @@ const Contact = () => {
       [name]: value,
     }))
 
-    // Automatically remove error when the user starts typing
     if (errors[name]) {
       setErrors((prev) => ({
         ...prev,
@@ -210,28 +210,24 @@ const Contact = () => {
     const newErrors = {}
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
-    // Validate Full Name
     if (!formData.name.trim()) {
       newErrors.name = 'Full name is required.'
     } else if (formData.name.trim().length < 2) {
       newErrors.name = 'Name must be at least 2 characters.'
     }
 
-    // Validate Email Address
     if (!formData.email.trim()) {
       newErrors.email = 'Email address is required.'
     } else if (!emailRegex.test(formData.email.trim())) {
       newErrors.email = 'Please provide a valid email address (e.g. name@domain.com).'
     }
 
-    // Validate Subject
     if (!formData.subject.trim()) {
       newErrors.subject = 'Subject is required.'
     } else if (formData.subject.trim().length < 3) {
       newErrors.subject = 'Subject must be at least 3 characters.'
     }
 
-    // Validate Message
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required.'
     } else if (formData.message.trim().length < 10) {
@@ -252,11 +248,9 @@ const Contact = () => {
 
     setIsSubmitting(true)
 
-    // Simulate network submission
     setTimeout(() => {
       setIsSubmitting(false)
       setIsSubmitted(true)
-      // Reset form fields
       setFormData({
         name: '',
         email: '',
@@ -268,44 +262,47 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-linear-to-b from-slate-50 via-white to-blue-50/40 py-16 sm:py-24">
+    <section
+      id="contact"
+      className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-blue-50/40 py-16 transition-colors duration-300 dark:from-slate-950 dark:via-slate-900/40 dark:to-slate-950 sm:py-24"
+    >
       {/* Background Decorative Blur Gradients */}
-      <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-blue-200/40 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-indigo-200/40 blur-3xl" />
-      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-125 w-125 rounded-full bg-sky-100/30 blur-3xl" />
+      <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-blue-200/40 blur-3xl dark:bg-blue-900/10" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-indigo-200/40 blur-3xl dark:bg-indigo-900/10" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-sky-100/30 blur-3xl dark:bg-sky-900/10" />
 
       <Container className="relative px-4 sm:px-6 lg:px-8">
-
+        
         {/* ================= 1. HERO SECTION ================= */}
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/90 px-4 py-1.5 text-xs font-semibold tracking-wider text-blue-700 uppercase shadow-sm">
-            <Sparkles className="h-3.5 w-3.5 text-blue-600" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/90 px-4 py-1.5 text-xs font-semibold tracking-wider text-blue-700 uppercase shadow-sm dark:border-blue-900/50 dark:bg-blue-950/40 dark:text-blue-300">
+            <Sparkles className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
             <span>Get In Touch</span>
           </div>
 
-          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 transition-colors dark:text-white sm:text-5xl lg:text-6xl">
             Let's{' '}
-            <span className="bg-linear-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent">
               Work Together
             </span>
           </h1>
 
-          <p className="mt-4 text-base text-slate-600 sm:text-lg lg:text-xl">
+          <p className="mt-4 text-base text-slate-600 transition-colors dark:text-slate-400 sm:text-lg lg:text-xl">
             Have a project in mind? Let's discuss how we can work together.
           </p>
         </div>
 
         {/* ================= MAIN TWO-COLUMN LAYOUT ================= */}
         <div className="mt-12 grid grid-cols-1 gap-8 lg:mt-16 lg:grid-cols-12 lg:gap-10">
-
+          
           {/* ================= 2. CONTACT INFORMATION SECTION ================= */}
           <div className="space-y-6 lg:col-span-5">
             {/* Section Heading */}
             <div>
-              <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+              <h2 className="text-2xl font-bold tracking-tight text-slate-900 transition-colors dark:text-white">
                 Contact Information
               </h2>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 transition-colors dark:text-slate-400">
                 Feel free to reach out directly through any of the channels below, or submit the contact form. I look forward to collaborating with you!
               </p>
             </div>
@@ -329,25 +326,25 @@ const Contact = () => {
             </div>
 
             {/* Work Availability Badge Card */}
-            <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/80 to-indigo-50/50 p-5 shadow-sm">
+            <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/80 to-indigo-50/50 p-5 shadow-sm dark:border-blue-900/40 dark:from-blue-950/30 dark:to-indigo-950/20">
               <div className="flex items-center gap-3">
                 <span className="relative flex h-3 w-3">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500"></span>
                 </span>
-                <span className="text-sm font-semibold text-slate-800">
+                <span className="text-sm font-semibold text-slate-800 transition-colors dark:text-slate-200">
                   Open for Freelance Projects & Full-time Roles
                 </span>
               </div>
-              <div className="mt-3 flex items-center gap-2 text-xs text-slate-600">
-                <Clock className="h-4 w-4 text-blue-600" />
+              <div className="mt-3 flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                <Clock className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                 <span>Quick turnaround — typical reply within 24 hours</span>
               </div>
             </div>
 
             {/* Social Links Card */}
-            <div className="rounded-2xl border border-slate-200/90 bg-white/90 p-5 shadow-sm backdrop-blur-sm">
-              <h3 className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
+            <div className="rounded-2xl border border-slate-200/90 bg-white/90 p-5 shadow-sm backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/90">
+              <h3 className="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400">
                 Find Me On Social Media
               </h3>
               <div className="mt-3 flex flex-wrap gap-3">
@@ -366,40 +363,40 @@ const Contact = () => {
 
           {/* ================= 3. CONTACT FORM SECTION ================= */}
           <div className="lg:col-span-7">
-            <div className="rounded-3xl border border-slate-200/90 bg-white p-6 shadow-xl shadow-slate-200/60 sm:p-8 lg:p-10">
-
+            <div className="rounded-3xl border border-slate-200/90 bg-white p-6 shadow-xl shadow-slate-200/60 transition-colors dark:border-slate-800 dark:bg-slate-900 dark:shadow-none sm:p-8 lg:p-10">
+              
               {/* Form Header */}
               <div className="mb-8">
-                <div className="inline-flex items-center gap-2 rounded-lg bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                <div className="inline-flex items-center gap-2 rounded-lg bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-950/40 dark:text-blue-300">
                   <MessageSquare className="h-3.5 w-3.5" />
                   <span>Send a Message</span>
                 </div>
-                <h3 className="mt-2 text-2xl font-bold tracking-tight text-slate-900">
+                <h3 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 transition-colors dark:text-white">
                   Got an Idea? Send Me a Note
                 </h3>
-                <p className="mt-1 text-sm text-slate-600">
+                <p className="mt-1 text-sm text-slate-600 transition-colors dark:text-slate-400">
                   I'd love to hear about your ideas, questions, or project proposals.
                 </p>
               </div>
 
               {/* SUCCESS MESSAGE ALERT */}
               {isSubmitted && (
-                <div className="mb-8 rounded-2xl border border-emerald-200 bg-emerald-50/90 p-6 text-emerald-900 shadow-sm transition-all duration-300">
+                <div className="mb-8 rounded-2xl border border-emerald-200 bg-emerald-50/90 p-6 text-emerald-900 shadow-sm transition-all duration-300 dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-200">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600 dark:bg-emerald-900/60 dark:text-emerald-400">
                       <CheckCircle2 className="h-6 w-6" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-base font-bold text-emerald-900">
+                      <h4 className="text-base font-bold text-emerald-900 dark:text-emerald-100">
                         Message Sent Successfully!
                       </h4>
-                      <p className="mt-1 text-sm text-emerald-700">
+                      <p className="mt-1 text-sm text-emerald-700 dark:text-emerald-300">
                         Thank you for reaching out! Your message has been sent successfully. I will review it and reply as soon as possible.
                       </p>
                       <button
                         type="button"
                         onClick={() => setIsSubmitted(false)}
-                        className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800 underline underline-offset-4 hover:text-emerald-950"
+                        className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800 underline underline-offset-4 hover:text-emerald-950 dark:text-emerald-300 dark:hover:text-emerald-100"
                       >
                         <span>Send another message</span>
                         <ArrowRight className="h-3 w-3" />
@@ -411,15 +408,15 @@ const Contact = () => {
 
               {/* FORM FIELDS */}
               <form onSubmit={handleSubmit} noValidate className="space-y-6">
-
+                
                 {/* Full Name & Email Fields Row */}
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-
+                  
                   {/* Full Name Field */}
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-sm font-semibold text-slate-700"
+                      className="block text-sm font-semibold text-slate-700 dark:text-slate-300"
                     >
                       Full Name <span className="text-rose-500">*</span>
                     </label>
@@ -432,10 +429,11 @@ const Contact = () => {
                         onChange={handleInputChange}
                         placeholder="John Doe"
                         disabled={isSubmitting}
-                        className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-800 placeholder-slate-400 transition-all duration-200 outline-none ${errors.name
-                            ? 'border-rose-400 bg-rose-50/30 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10'
-                            : 'border-slate-200 bg-slate-50/50 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10'
-                          }`}
+                        className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-800 placeholder-slate-400 transition-all duration-200 outline-none dark:text-slate-100 dark:placeholder-slate-500 ${
+                          errors.name
+                            ? 'border-rose-400 bg-rose-50/30 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10 dark:border-rose-500/70 dark:bg-rose-950/20'
+                            : 'border-slate-200 bg-slate-50/50 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-800/60 dark:focus:border-blue-500 dark:focus:bg-slate-800'
+                        }`}
                       />
                     </div>
                     {errors.name && (
@@ -450,7 +448,7 @@ const Contact = () => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-semibold text-slate-700"
+                      className="block text-sm font-semibold text-slate-700 dark:text-slate-300"
                     >
                       Email Address <span className="text-rose-500">*</span>
                     </label>
@@ -463,10 +461,11 @@ const Contact = () => {
                         onChange={handleInputChange}
                         placeholder="john@example.com"
                         disabled={isSubmitting}
-                        className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-800 placeholder-slate-400 transition-all duration-200 outline-none ${errors.email
-                            ? 'border-rose-400 bg-rose-50/30 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10'
-                            : 'border-slate-200 bg-slate-50/50 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10'
-                          }`}
+                        className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-800 placeholder-slate-400 transition-all duration-200 outline-none dark:text-slate-100 dark:placeholder-slate-500 ${
+                          errors.email
+                            ? 'border-rose-400 bg-rose-50/30 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10 dark:border-rose-500/70 dark:bg-rose-950/20'
+                            : 'border-slate-200 bg-slate-50/50 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-800/60 dark:focus:border-blue-500 dark:focus:bg-slate-800'
+                        }`}
                       />
                     </div>
                     {errors.email && (
@@ -482,7 +481,7 @@ const Contact = () => {
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-sm font-semibold text-slate-700"
+                    className="block text-sm font-semibold text-slate-700 dark:text-slate-300"
                   >
                     Subject <span className="text-rose-500">*</span>
                   </label>
@@ -495,10 +494,11 @@ const Contact = () => {
                       onChange={handleInputChange}
                       placeholder="Project Inquiry / Hiring / Collaboration"
                       disabled={isSubmitting}
-                      className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-800 placeholder-slate-400 transition-all duration-200 outline-none ${errors.subject
-                          ? 'border-rose-400 bg-rose-50/30 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10'
-                          : 'border-slate-200 bg-slate-50/50 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10'
-                        }`}
+                      className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-800 placeholder-slate-400 transition-all duration-200 outline-none dark:text-slate-100 dark:placeholder-slate-500 ${
+                        errors.subject
+                          ? 'border-rose-400 bg-rose-50/30 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10 dark:border-rose-500/70 dark:bg-rose-950/20'
+                          : 'border-slate-200 bg-slate-50/50 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-800/60 dark:focus:border-blue-500 dark:focus:bg-slate-800'
+                      }`}
                     />
                   </div>
                   {errors.subject && (
@@ -514,11 +514,11 @@ const Contact = () => {
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="message"
-                      className="block text-sm font-semibold text-slate-700"
+                      className="block text-sm font-semibold text-slate-700 dark:text-slate-300"
                     >
                       Message <span className="text-rose-500">*</span>
                     </label>
-                    <span className="text-xs text-slate-400">
+                    <span className="text-xs text-slate-400 dark:text-slate-500">
                       {formData.message.length} characters
                     </span>
                   </div>
@@ -531,10 +531,11 @@ const Contact = () => {
                       onChange={handleInputChange}
                       placeholder="Hi Sohel, I'm reaching out regarding..."
                       disabled={isSubmitting}
-                      className={`w-full resize-y rounded-xl border px-4 py-3 text-sm text-slate-800 placeholder-slate-400 transition-all duration-200 outline-none ${errors.message
-                          ? 'border-rose-400 bg-rose-50/30 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10'
-                          : 'border-slate-200 bg-slate-50/50 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10'
-                        }`}
+                      className={`w-full resize-y rounded-xl border px-4 py-3 text-sm text-slate-800 placeholder-slate-400 transition-all duration-200 outline-none dark:text-slate-100 dark:placeholder-slate-500 ${
+                        errors.message
+                          ? 'border-rose-400 bg-rose-50/30 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10 dark:border-rose-500/70 dark:bg-rose-950/20'
+                          : 'border-slate-200 bg-slate-50/50 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-800/60 dark:focus:border-blue-500 dark:focus:bg-slate-800'
+                      }`}
                     />
                   </div>
                   {errors.message && (
