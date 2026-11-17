@@ -132,7 +132,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-gradient-to-b from-slate-50/70 via-white to-slate-50/40 py-16 transition-colors duration-300 border-b border-slate-100 dark:from-slate-950 dark:via-slate-900/40 dark:to-slate-950 dark:border-slate-800/80 sm:py-24"
+      className="relative overflow-hidden bg-linear-to-b from-slate-50/70 via-white to-slate-50/40 py-16 transition-colors duration-300 border-b border-slate-100 dark:from-slate-950 dark:via-slate-900/40 dark:to-slate-950 dark:border-slate-800/80 sm:py-24"
     >
       {/* Decorative ambient background glows */}
       <div className="pointer-events-none absolute -top-32 right-10 h-80 w-80 rounded-full bg-blue-100/40 blur-3xl dark:bg-blue-900/10" />
@@ -149,7 +149,7 @@ const About = () => {
 
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 transition-colors dark:text-white sm:text-4xl lg:text-5xl">
             About{' '}
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent">
               Me
             </span>
           </h2>
@@ -166,7 +166,7 @@ const About = () => {
               <div className="group relative overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-4 shadow-xl shadow-slate-200/70 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none">
                 
                 {/* Photo frame */}
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-100/70 via-slate-100 to-indigo-100/50 p-2 dark:from-slate-800 dark:via-slate-800/80 dark:to-slate-900">
+                <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-blue-100/70 via-slate-100 to-indigo-100/50 p-2 dark:from-slate-800 dark:via-slate-800/80 dark:to-slate-900">
                   <img
                     src={hero}
                     alt="Sohel Rana"
@@ -199,7 +199,7 @@ const About = () => {
               </div>
 
               {/* Learning Journey Highlight Box */}
-              <div className="mt-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/80 to-indigo-50/50 p-5 shadow-sm dark:border-blue-900/40 dark:from-blue-950/30 dark:to-indigo-950/20">
+              <div className="mt-6 rounded-2xl border border-blue-100 bg-linear-to-br from-blue-50/80 to-indigo-50/50 p-5 shadow-sm dark:border-blue-900/40 dark:from-blue-950/30 dark:to-indigo-950/20">
                 <div className="flex items-start gap-3">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-300">
                     <GraduationCap className="h-5 w-5" />
@@ -292,7 +292,7 @@ const About = () => {
                         <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${stat.bgColor} shadow-2xs`}>
                           <IconComponent className="h-5 w-5" />
                         </div>
-                        <span className={`text-2xl font-extrabold bg-gradient-to-r ${stat.accent} bg-clip-text text-transparent`}>
+                        <span className={`text-2xl font-extrabold bg-linear-to-r ${stat.accent} bg-clip-text text-transparent`}>
                           {stat.value}
                         </span>
                       </div>
