@@ -1,58 +1,29 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Container from '../components/Container'
+import { Link, useLocation } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import { Sun, Moon, Download, Menu, X } from 'lucide-react'
 
 export const Heder = () => {
   const { theme, toggleTheme } = useTheme()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('home')
+  const location = useLocation()
 
-  // Navigation Links corresponding to Single-Page section IDs
+  // Standard Navigation Links with React Router
   const navLinks = [
-    { name: 'Home', targetId: 'home' },
-    { name: 'About', targetId: 'about' },
-    { name: 'Services', targetId: 'services' },
-    { name: 'Skills', targetId: 'skills' },
-    { name: 'Projects', targetId: 'projects' },
-    { name: 'Contact', targetId: 'contact' },
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Services', path: '/service' },
+    { name: 'Projects', path: '/project' },
+    { name: 'Contact', path: '/contact' },
   ]
 
-  // Active section tracking on window scroll
-  useEffect(() => {
-    const sectionIds = ['home', 'about', 'services', 'skills', 'projects', 'contact']
-
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 140 // offset for navbar height + buffer
-
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sectionIds[i])
-        if (section) {
-          const top = section.offsetTop
-          if (scrollPosition >= top) {
-            setActiveSection(sectionIds[i])
-            break
-          }
-        }
-      }
+  // Check if link is active based on current URL pathname
+  const isLinkActive = (path) => {
+    if (path === '/') {
+      return location.pathname === '/'
     }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll() // initial call
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  // Smooth scroll handler
-  const scrollToSection = (e, targetId) => {
-    e.preventDefault()
-    const targetElement = document.getElementById(targetId)
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' })
-      window.history.pushState(null, '', `#${targetId}`)
-      setActiveSection(targetId)
-    }
-    setMobileMenuOpen(false)
+    return location.pathname.startsWith(path)
   }
 
   return (
@@ -61,10 +32,10 @@ export const Heder = () => {
         <div className="flex h-16 items-center justify-between sm:h-20">
           
           {/* Logo */}
-          <a
-            href="#home"
-            onClick={(e) => scrollToSection(e, 'home')}
+          <Link
+            to="/"
             className="group flex items-center gap-2"
+            onClick={() => setMobileMenuOpen(false)}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/25 transition-transform duration-200 group-hover:scale-105">
               <span className="text-base font-extrabold">SR</span>
@@ -77,36 +48,35 @@ export const Heder = () => {
                 Frontend Dev
               </span>
             </div>
-          </a>
+          </Link>
 
-          {/* Desktop Single-Page Navigation Links */}
+          {/* Desktop Navigation Links */}
           <nav className="hidden md:block">
             <ul className="flex items-center gap-x-1 lg:gap-x-2">
               {navLinks.map((link) => {
-                const isActive = activeSection === link.targetId
+                const active = isLinkActive(link.path)
                 return (
-                  <li key={link.targetId}>
-                    <a
-                      href={`#${link.targetId}`}
-                      onClick={(e) => scrollToSection(e, link.targetId)}
+                  <li key={link.path}>
+                    <Link
+                      to={link.path}
                       className={`relative rounded-lg px-3.5 py-2 text-sm font-semibold transition-all duration-200 ${
-                        isActive
+                        active
                           ? 'text-blue-600 dark:text-blue-400'
                           : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800/60 dark:hover:text-white'
                       }`}
                     >
                       {link.name}
-                      {isActive && (
+                      {active && (
                         <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-blue-600 dark:bg-blue-400" />
                       )}
-                    </a>
+                    </Link>
                   </li>
                 )
               })}
             </ul>
           </nav>
 
-          {/* Right Actions: Download CV + Theme Toggle */}
+          {/* Right Actions: Download CV + Beautiful Theme Toggle */}
           <div className="flex items-center gap-2.5 sm:gap-3">
             
             {/* Download CV Button */}
@@ -118,18 +88,18 @@ export const Heder = () => {
               <span>Download CV</span>
             </a>
 
-            {/* Light / Dark Mode Toggle Button */}
+            {/* Premium Theme Toggle Button with Smooth Animations */}
             <button
               type="button"
               onClick={toggleTheme}
               aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
               title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-              className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 shadow-2xs transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:bg-slate-50 hover:text-blue-600 hover:shadow-sm active:scale-95 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-amber-400"
+              className="group relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:bg-slate-50 hover:text-blue-600 hover:shadow-md active:scale-95 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-amber-400/50 dark:hover:bg-slate-800 dark:hover:text-amber-300"
             >
               {theme === 'dark' ? (
-                <Sun className="h-5 w-5 text-amber-400 transition-transform duration-300 hover:rotate-45" />
+                <Sun className="h-5 w-5 text-amber-400 transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110" />
               ) : (
-                <Moon className="h-5 w-5 text-slate-700 transition-transform duration-300 hover:-rotate-12" />
+                <Moon className="h-5 w-5 text-slate-700 transition-transform duration-300 group-hover:-rotate-45 group-hover:scale-110" />
               )}
             </button>
 
@@ -151,20 +121,20 @@ export const Heder = () => {
           <div className="border-t border-slate-200/80 py-4 md:hidden dark:border-slate-800/80">
             <ul className="flex flex-col gap-y-1">
               {navLinks.map((link) => {
-                const isActive = activeSection === link.targetId
+                const active = isLinkActive(link.path)
                 return (
-                  <li key={link.targetId}>
-                    <a
-                      href={`#${link.targetId}`}
-                      onClick={(e) => scrollToSection(e, link.targetId)}
+                  <li key={link.path}>
+                    <Link
+                      to={link.path}
+                      onClick={() => setMobileMenuOpen(false)}
                       className={`block rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors ${
-                        isActive
+                        active
                           ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400'
                           : 'text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900'
                       }`}
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   </li>
                 )
               })}

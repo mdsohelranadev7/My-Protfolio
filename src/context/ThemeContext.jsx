@@ -3,21 +3,23 @@ import { createContext, useContext, useEffect, useState } from 'react'
 const ThemeContext = createContext()
 
 export const ThemeProvider = ({ children }) => {
-  // Initialize theme from localStorage or fallback to system preference
+  // Initialize theme from localStorage, defaulting to 'dark'
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme')
-      if (savedTheme === 'light' || savedTheme === 'dark') {
-        return savedTheme
+      try {
+        const savedTheme = localStorage.getItem('theme')
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+          return savedTheme
+        }
+      } catch {
+        // Fallback to default
       }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light'
+      return 'dark' // Set Dark Mode as the default website theme
     }
-    return 'light'
+    return 'dark'
   })
 
-  // Apply theme to document element and persist in localStorage
+  // Apply theme class to documentElement and persist to localStorage
   useEffect(() => {
     const root = document.documentElement
     if (theme === 'dark') {
@@ -27,22 +29,13 @@ export const ThemeProvider = ({ children }) => {
       root.classList.remove('dark')
       root.classList.add('light')
     }
-    localStorage.setItem('theme', theme)
-  }, [theme])
 
-  // Listen to system theme changes if user hasn't explicitly set preference
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    const handleChange = (e) => {
-      const savedTheme = localStorage.getItem('theme')
-      if (!savedTheme) {
-        setTheme(e.matches ? 'dark' : 'light')
-      }
+    try {
+      localStorage.setItem('theme', theme)
+    } catch {
+      // Ignore storage errors in restricted environments
     }
-
-    mediaQuery.addEventListener('change', handleChange)
-    return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [])
+  }, [theme])
 
   // Toggle between light and dark modes
   const toggleTheme = () => {
