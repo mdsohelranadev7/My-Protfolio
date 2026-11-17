@@ -1,5 +1,4 @@
-import React from 'react'
-import { ExternalLink, Code2 } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 
 /**

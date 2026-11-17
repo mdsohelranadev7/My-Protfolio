@@ -1,4 +1,3 @@
-import React from 'react'
 import ProjectCard from './ProjectCard'
 
 /**
@@ -24,6 +23,4 @@ const Projectcart = (props) => {
 }
 
 export default Projectcart
-export { ProjectCard }
-
 export { ProjectCard }

@@ -1,4 +1,3 @@
-import React from 'react'
 import Container from '../components/Container'
 import hero from '../assets/hero.png'
 import {
@@ -132,7 +131,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-linear-to-b from-slate-50/70 via-white to-slate-50/40 py-16 transition-colors duration-300 border-b border-slate-100 dark:from-slate-950 dark:via-slate-900/40 dark:to-slate-950 dark:border-slate-800/80 sm:py-24"
+      className="scroll-mt-20 sm:scroll-mt-24 relative overflow-hidden bg-gradient-to-b from-slate-50/70 via-white to-slate-50/40 py-16 transition-colors duration-300 border-b border-slate-100 dark:from-slate-950 dark:via-slate-900/40 dark:to-slate-950 dark:border-slate-800/80 sm:py-24"
     >
       {/* Decorative ambient background glows */}
       <div className="pointer-events-none absolute -top-32 right-10 h-80 w-80 rounded-full bg-blue-100/40 blur-3xl dark:bg-blue-900/10" />

@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Container from '../components/Container'
 import SkillCard from '../components/SkillCard'
-import { Sparkles, Laptop, Wrench, Layers } from 'lucide-react'
+import { Sparkles, Laptop } from 'lucide-react'
 import {
   FaHtml5,
   FaCss3Alt,
@@ -156,7 +156,7 @@ const Service = () => {
   return (
     <section
       id="skills"
-      className="relative overflow-hidden bg-white py-16 transition-colors duration-300 border-b border-slate-100 dark:border-slate-800/80 dark:bg-slate-950 sm:py-24"
+      className="scroll-mt-20 sm:scroll-mt-24 relative overflow-hidden bg-white py-16 transition-colors duration-300 border-b border-slate-100 dark:border-slate-800/80 dark:bg-slate-950 sm:py-24"
     >
       {/* Decorative ambient background glows */}
       <div className="pointer-events-none absolute -top-28 left-10 h-72 w-72 rounded-full bg-blue-100/50 blur-3xl dark:bg-blue-900/10" />

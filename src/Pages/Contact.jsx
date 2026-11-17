@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Container from '../components/Container'
 import {
   Mail,
@@ -264,7 +264,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-blue-50/40 py-16 transition-colors duration-300 dark:from-slate-950 dark:via-slate-900/40 dark:to-slate-950 sm:py-24"
+      className="scroll-mt-20 sm:scroll-mt-24 relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-blue-50/40 py-16 transition-colors duration-300 dark:from-slate-950 dark:via-slate-900/40 dark:to-slate-950 sm:py-24"
     >
       {/* Background Decorative Blur Gradients */}
       <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-blue-200/40 blur-3xl dark:bg-blue-900/10" />

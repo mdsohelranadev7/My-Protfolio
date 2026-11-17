@@ -1,13 +1,29 @@
-import React from 'react'
 import Container from '../components/Container'
-import { Link } from 'react-router-dom'
 import { ArrowUp, Heart } from 'lucide-react'
 import { FaGithub, FaLinkedin, FaFacebook } from 'react-icons/fa'
 
 export const Footer = () => {
+  const scrollToSection = (e, targetId) => {
+    e.preventDefault()
+    const targetElement = document.getElementById(targetId)
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' })
+      window.history.pushState(null, '', `#${targetId}`)
+    }
+  }
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
+
+  const navLinks = [
+    { name: 'Home', targetId: 'home' },
+    { name: 'About', targetId: 'about' },
+    { name: 'Services', targetId: 'services' },
+    { name: 'Skills', targetId: 'skills' },
+    { name: 'Projects', targetId: 'projects' },
+    { name: 'Contact', targetId: 'contact' },
+  ]
 
   return (
     <footer className="relative border-t border-slate-200/80 bg-slate-50/80 py-12 transition-colors duration-300 dark:border-slate-800/80 dark:bg-slate-950">
@@ -16,14 +32,18 @@ export const Footer = () => {
           
           {/* Logo & Tagline */}
           <div className="flex flex-col items-center sm:items-start">
-            <Link to="/" className="flex items-center gap-2">
+            <a
+              href="#home"
+              onClick={(e) => scrollToSection(e, 'home')}
+              className="flex items-center gap-2"
+            >
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-sm">
                 <span className="text-sm font-extrabold">SR</span>
               </div>
               <span className="text-base font-extrabold tracking-tight text-slate-900 dark:text-white">
                 Sohel <span className="text-blue-600 dark:text-blue-400">Rana</span>
               </span>
-            </Link>
+            </a>
             <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
               Frontend Developer • Building modern web applications
             </p>
@@ -32,11 +52,17 @@ export const Footer = () => {
           {/* Quick Navigation Links */}
           <nav>
             <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-semibold text-slate-600 dark:text-slate-400">
-              <li><Link to="/" className="transition-colors hover:text-blue-600 dark:hover:text-blue-400">Home</Link></li>
-              <li><Link to="/about" className="transition-colors hover:text-blue-600 dark:hover:text-blue-400">About</Link></li>
-              <li><Link to="/service" className="transition-colors hover:text-blue-600 dark:hover:text-blue-400">Skills</Link></li>
-              <li><Link to="/project" className="transition-colors hover:text-blue-600 dark:hover:text-blue-400">Projects</Link></li>
-              <li><Link to="/contact" className="transition-colors hover:text-blue-600 dark:hover:text-blue-400">Contact</Link></li>
+              {navLinks.map((link) => (
+                <li key={link.targetId}>
+                  <a
+                    href={`#${link.targetId}`}
+                    onClick={(e) => scrollToSection(e, link.targetId)}
+                    className="transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </nav>
 

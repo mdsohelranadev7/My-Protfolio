@@ -1,14 +1,9 @@
-import React from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
 import RootLayouts from './Layouts/RootLayouts'
 import Home from './Pages/Home'
-import About from './Pages/About'
 import Error from './Pages/Error'
-import Service from './Pages/Service'
-import Project from './Pages/Project'
-import Contact from './Pages/Contact'
 
 function App() {
   return (
@@ -16,10 +11,14 @@ function App() {
       <Routes>
         <Route path="/" element={<RootLayouts />}>
           <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="service" element={<Service />} />
-          <Route path="project" element={<Project />} />
-          <Route path="contact" element={<Contact />} />
+          {/* Direct URL paths map to Single-Page Home without opening separate pages */}
+          <Route path="about" element={<Home />} />
+          <Route path="services" element={<Home />} />
+          <Route path="service" element={<Home />} />
+          <Route path="skills" element={<Home />} />
+          <Route path="projects" element={<Home />} />
+          <Route path="project" element={<Home />} />
+          <Route path="contact" element={<Home />} />
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>

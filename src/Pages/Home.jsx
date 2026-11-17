@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Container from '../components/Container'
 import hero from '../assets/hero.png'
 import {
   Download,
   ArrowRight,
-  Sparkles,
 } from 'lucide-react'
 import {
   FaGithub,
@@ -15,15 +14,17 @@ import {
 } from 'react-icons/fa'
 import { SiTailwindcss } from 'react-icons/si'
 import About from './About'
+import Services from './Services'
 import Service from './Service'
 import Project from './Project'
 import Contact from './Contact'
+
+const titles = ['Frontend Developer', 'React JS Developer', 'Web Designer']
 
 /**
  * Modern Hero Section Component
  */
 const HeroSection = () => {
-  const titles = ['Frontend Developer', 'React JS Developer', 'Web Designer']
   const [titleIndex, setTitleIndex] = useState(0)
   const [currentText, setCurrentText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
@@ -37,9 +38,11 @@ const HeroSection = () => {
       // Pause when full title is typed
       timeout = setTimeout(() => setIsDeleting(true), 2000)
     } else if (isDeleting && currentText === '') {
-      // Switch to next title after deletion
-      setIsDeleting(false)
-      setTitleIndex((prevIndex) => (prevIndex + 1) % titles.length)
+      // Pause briefly after deletion before switching to next title
+      timeout = setTimeout(() => {
+        setIsDeleting(false)
+        setTitleIndex((prevIndex) => (prevIndex + 1) % titles.length)
+      }, 400)
     } else {
       // Type or delete characters
       const nextText = isDeleting
@@ -55,11 +58,23 @@ const HeroSection = () => {
     return () => clearTimeout(timeout)
   }, [currentText, isDeleting, titleIndex])
 
+  const scrollToSection = (e, sectionId) => {
+    e.preventDefault()
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+      window.history.pushState(null, '', `#${sectionId}`)
+    }
+  }
+
   return (
     <section
-      id="hero"
-      className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/50 to-blue-50/20 py-16 transition-colors duration-300 border-b border-slate-100 dark:from-slate-950 dark:via-slate-900/40 dark:to-slate-950 dark:border-slate-800/80 sm:py-24 lg:py-28"
+      id="home"
+      className="scroll-mt-20 sm:scroll-mt-24 relative overflow-hidden bg-gradient-to-b from-white via-slate-50/50 to-blue-50/20 py-16 transition-colors duration-300 border-b border-slate-100 dark:from-slate-950 dark:via-slate-900/40 dark:to-slate-950 dark:border-slate-800/80 sm:py-24 lg:py-28"
     >
+      {/* Fallback anchor for #hero */}
+      <span id="hero" className="absolute -top-24" />
+
       {/* Ambient background glows */}
       <div className="pointer-events-none absolute -top-28 left-1/4 h-96 w-96 rounded-full bg-blue-200/35 blur-3xl dark:bg-blue-600/15" />
       <div className="pointer-events-none absolute top-1/3 -right-20 h-96 w-96 rounded-full bg-indigo-200/30 blur-3xl dark:bg-indigo-600/15" />
@@ -103,7 +118,8 @@ const HeroSection = () => {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4 sm:justify-start">
               {/* View My Work */}
               <a
-                href="#project"
+                href="#projects"
+                onClick={(e) => scrollToSection(e, 'projects')}
                 className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:from-blue-700 hover:via-indigo-700 hover:to-blue-600 hover:shadow-xl hover:shadow-blue-500/35 active:scale-95"
               >
                 <span>View My Work</span>
@@ -235,13 +251,14 @@ const HeroSection = () => {
 }
 
 /**
- * Main Home Page Component
+ * Main Home Page Component (Single-Page Portfolio)
  */
 const Home = () => {
   return (
     <div className="transition-colors duration-300">
       <HeroSection />
       <About />
+      <Services />
       <Service />
       <Project />
       <Contact />
