@@ -7,7 +7,6 @@ import About from './Pages/About'
 import Error from './Pages/Error'
 import Service from './Pages/Service'
 import Project from './Pages/Project'
-import Blog from './Pages/Blog'
 import Contact from './Pages/Contact'
 
 function App() {
@@ -22,7 +21,6 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="service" element={<Service />} />
         <Route path="project" element={<Project />} />
-        <Route path="blog" element={<Blog />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<Error />} />
       </Route>
