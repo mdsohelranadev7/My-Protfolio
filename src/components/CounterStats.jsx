@@ -124,7 +124,7 @@ const CounterStats = () => {
   return (
     <div
       ref={containerRef}
-      className="mx-auto my-12 w-full max-w-5xl overflow-hidden rounded-[16px] border border-slate-200 bg-white shadow-sm transition-all duration-300 dark:border-neutral-800 dark:bg-[#080808] dark:shadow-none"
+      className="mx-auto my-12 w-full max-w-5xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 dark:border-neutral-800 dark:bg-[#080808] dark:shadow-none"
     >
       <div className="grid grid-cols-2 lg:grid-cols-4">
         {stats.map((item) => (
